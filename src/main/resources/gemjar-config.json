@@ -9,7 +9,7 @@
   "gemjarToken": "8987eed1-240a-4e58-a576-c498fcf3d36e1662376740468",
   "dev": {
     "browserName": "Chrome",
-    "launchUrl": "https://jewel.gemecosystem.com/#/login",
+    "launchUrl": "https://jewel.gemecosystem.com/",
     "browserTimeout": 10
   },
   "beta": {

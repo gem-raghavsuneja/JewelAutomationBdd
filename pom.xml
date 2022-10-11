@@ -11,9 +11,13 @@
     </properties>
     <dependencies>        <!-- https://mvnrepository.com/artifact/com.gemecosystem.gemjar/gemjar-core -->
         <dependency>
+<!--            <groupId>com.gemecosystem.gemjar</groupId>-->
+<!--            <artifactId>gemjar</artifactId>-->
+<!--            <version>1.0.0</version>-->
+
             <groupId>com.gemecosystem.gemjar</groupId>
             <artifactId>gemjar</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.9</version>
         </dependency>
     </dependencies>
 </project>
