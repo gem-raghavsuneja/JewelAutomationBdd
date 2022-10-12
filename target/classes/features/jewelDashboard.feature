@@ -314,4 +314,7 @@ Feature: Jewel Dashboard Automation
       | arpit.mishra | arpit1234 | https://jewel.gemecosystem.com/#/autolytics/shared-report?rule=eyJyZXBvcnROYW1lIjoiU3VpdGUgUnVuIFJlcG9ydCIsInJlcG9ydGlkIjoxLCJlbnYiOlsiUHJvZCJdLCJwcm9qZWN0IjpbIkdFTUVDT1NZU1RFTV9BUElTIl0sInN0YXJ0VGltZSI6IjEvMS8yMDIyIiwiZW5kVGltZSI6IjEwLzExLzIwMjIifQ== | Execution Report | https://jewel.gemecosystem.com/#/autolytics/extent-report?s_run_id=GEMECOSYSTEM_APIS_PROD_B8B819A1-7CE0-44C3-B5C7-AE00FED84937 |
 
 
-
+Scenario:Checking the copy button inside the Report
+  Given You are on the login screen
+  Then Enter username as "raghavsuneja123"
+  Then Enter Password

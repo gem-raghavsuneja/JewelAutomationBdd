@@ -936,7 +936,14 @@ public class StepDefination {
 
         WebDriver driver = new ChromeDriver(o);
         driver.get(h);
-
+        String s = driver.getCurrentUrl();
+        if (s.equals("https://jewel.gemecosystem.com/#/login")) {
+            GemTestReporter.addTestStep("Validatinng the Url", "Expected : Login screen should be visible", STATUS.PASS);
+            String ss=DriverAction.getElement(By.xpath("//span[@class='acc']")).getText();
+            System.out.println(ss);
+        } else {
+            GemTestReporter.addTestStep("Validatinng the Url", "Expected : Login screen should be visible", STATUS.FAIL);
+        }
     }
 
     //////////////////////////////////////////////////////////

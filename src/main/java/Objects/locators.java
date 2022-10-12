@@ -59,7 +59,6 @@ public class locators {
     public static By parent_tab = By.xpath("(//div[starts-with(@id,'left-tabs-example-tabParent')])[3]/a");
     public static By tab_select = By.xpath("(//div[starts-with(@id,'left-tabs-example-tabParent')])[1]/a");
 
-
     public static By logIn = By.xpath("//*[@id=\"navbarTogglerDemo02\"]/ul[2]/li[1]/a/button/span");
     public static By searchBox = By.xpath("//*[@title=\"Search\"]");
     public static By jewel = By.xpath("//*[@class=\"LC20lb MBeuO DKV0Md\"]");
