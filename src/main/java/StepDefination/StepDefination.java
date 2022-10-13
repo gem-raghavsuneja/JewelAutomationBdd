@@ -118,8 +118,7 @@ public class StepDefination {
             present = false;
         }
 
-
-        if (present == true) {
+        if (present) {
             try {
                 DriverAction.click(locators.autolytics, "Autolytics Button", "Successfully clicked on the Autolytics Button");
             } catch (Exception e) {
@@ -215,7 +214,7 @@ public class StepDefination {
             } catch (Exception e) {
                 present = false;
             }
-            if (present == true) {
+            if (present) {
                 try {
                     DriverAction.click(locators.copy_bridge_token, "copy button", "Click was successful");
                     DriverAction.waitSec(2);
@@ -245,7 +244,7 @@ public class StepDefination {
         } catch (Exception e) {
             present = false;
         }
-        if (present == true) {
+        if (present) {
             try {
                 DriverAction.click(locators.bridge_token, "Bridge token Button", "Bridge token was clicked");
                 String s = DriverAction.getCurrentURL();
@@ -300,22 +299,13 @@ public class StepDefination {
             String time = DriverAction.getElement(locators.date_tab).getText();
             System.out.println(time);
             String timep = time.substring(11, 28);
-            String date = timep;
-//            String r = String.valueOf(date.charAt(0));
-//            if (r.equals(" ")) {
-//                date = "0" + date.substring(1);
-//            }
-
             SimpleDateFormat formatter = new SimpleDateFormat("MMMM dd,yyyy", Locale.ENGLISH);
-
-            String dateInString = date;
-            Date dateupdate = formatter.parse(dateInString);
-
+            Date dateupdate = formatter.parse(timep);
             System.out.println(dateupdate);
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMMM dd, yyyy");
             LocalDateTime now = LocalDateTime.now();
             String loc = dtf.format(now);
-            if (StringUtils.contains(date, loc)) {
+            if (StringUtils.contains(timep, loc)) {
                 GemTestReporter.addTestStep("Checking date", "Dates are matching", STATUS.PASS);
             } else {
                 GemTestReporter.addTestStep("Checking date", "Dates are not matching", STATUS.FAIL);
@@ -330,8 +320,6 @@ public class StepDefination {
                 jo = "0" + jo.substring(1);
                 hel[0] = jo;
             }
-            System.out.println(hel[0]);
-            System.out.println(hel[1]);
             DateTimeFormatter Time = DateTimeFormatter.ofPattern("hh/mm/ss");
             LocalDateTime ti = LocalDateTime.now();
             String timess = Time.format(ti);
