@@ -6,31 +6,24 @@ import com.gemini.generic.ui.utils.DriverAction;
 import com.gemini.generic.ui.utils.DriverManager;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.plugin.event.Node;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
-import java.sql.Driver;
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import Objects.locators;
+import Objects.Locators;
 
 
 public class StepDefination {
@@ -39,21 +32,21 @@ public class StepDefination {
     @Given("You are on the login screen")
     public void you_are_on_the_login_screen() {
         DriverAction.waitSec(2);
-        DriverAction.click(locators.login_screen);
+        DriverAction.click(Locators.login_screen);
     }
 
     @Then("Enter username as {string}")
     public void enter_username_as(String string) {
-        DriverAction.typeText(locators.user_name, "raghavsuneja123");
+        DriverAction.typeText(Locators.user_name, "raghavsuneja123");
 
     }
 
     @Then("Enter Password")
     public void enter_password() {
-        DriverAction.typeText(locators.password, "Abc123@@");
+        DriverAction.typeText(Locators.password, "Abc123@@");
 
         try {
-            DriverAction.click(locators.login_button, "Login Button", "Clicked Successfully on the Login Button");
+            DriverAction.click(Locators.login_button, "Login Button", "Clicked Successfully on the Login Button");
         } catch (Exception e) {
             e.printStackTrace();
             GemTestReporter.addTestStep("ERROR", "SOME ERROR OCCURRED", STATUS.FAIL);
@@ -65,12 +58,12 @@ public class StepDefination {
         try {
 
             DriverAction.waitSec(2);
-            DriverAction.click(locators.home_button, "Click on Home Button", " Clicked successfully on the Home Button");
+            DriverAction.click(Locators.home_button, "Click on Home Button", " Clicked successfully on the Home Button");
             DriverAction.waitSec(2);
-            DriverAction.click(locators.profile, "Click on Profile button", "Clicked on the Profile Button");
+            DriverAction.click(Locators.profile, "Click on Profile button", "Clicked on the Profile Button");
 
             GemTestReporter.addTestStep("Status of logout button", "Logout button is  visible", STATUS.PASS, DriverAction.takeSnapShot());
-            Boolean b = DriverAction.getElement(locators.log_out).isDisplayed();
+            Boolean b = DriverAction.getElement(Locators.log_out).isDisplayed();
             System.out.println(b);
         } catch (Exception e) {
             e.printStackTrace();
@@ -87,8 +80,8 @@ public class StepDefination {
         try {
 
             DriverAction.waitSec(2);
-            DriverAction.click(locators.home_button, "Home Button", "Clicked Successfully on the Home Button");
-            String s = DriverAction.getElement(locators.page_title).getText();
+            DriverAction.click(Locators.home_button, "Home Button", "Clicked Successfully on the Home Button");
+            String s = DriverAction.getElement(Locators.page_title).getText();
             GemTestReporter.addTestStep("Text of Home Screen", s, STATUS.INFO);
 
             System.out.println(s);
@@ -107,12 +100,12 @@ public class StepDefination {
 
     @Then("Click on the Autolytics screen")
     public void click_on_the_autolytics_screen() {
-        DriverAction.click(locators.home_button, "Home button", "Successfully clicked on the Home button");
+        DriverAction.click(Locators.home_button, "Home button", "Successfully clicked on the Home button");
 
 
         boolean present;
         try {
-            DriverManager.getWebDriver().findElement(locators.autolytics);
+            DriverManager.getWebDriver().findElement(Locators.autolytics);
             present = true;
         } catch (Exception e) {
             present = false;
@@ -120,7 +113,7 @@ public class StepDefination {
 
         if (present) {
             try {
-                DriverAction.click(locators.autolytics, "Autolytics Button", "Successfully clicked on the Autolytics Button");
+                DriverAction.click(Locators.autolytics, "Autolytics Button", "Successfully clicked on the Autolytics Button");
             } catch (Exception e) {
                 e.printStackTrace();
                 GemTestReporter.addTestStep("Autolytics Button Status", "Not clicked", STATUS.FAIL);
@@ -136,11 +129,11 @@ public class StepDefination {
     @Then("Verify the Autolytics Screen")
     public void verify_the_autolytics_screen() {
         DriverAction.waitSec(2);
-        DriverAction.click(locators.home_button, "Home Button", "Click was successful");
+        DriverAction.click(Locators.home_button, "Home Button", "Click was successful");
         try {
 
 
-            DriverAction.click(locators.autolytics, "Autolytics Button", "Click was Successful");
+            DriverAction.click(Locators.autolytics, "Autolytics Button", "Click was Successful");
             String s = DriverAction.getCurrentURL();
 
             if (s.contains("autolytics")) {
@@ -160,12 +153,12 @@ public class StepDefination {
     @Then("Verify the Bridge Token Button is clickable or not")
     public void verify_the_bridge_token_button_is_clickable_or_not() {
         DriverAction.waitSec(2);
-        DriverAction.click(locators.home_button, "Home Button", "Click was successful");
+        DriverAction.click(Locators.home_button, "Home Button", "Click was successful");
 
 
         boolean present;
         try {
-            DriverManager.getWebDriver().findElement(locators.bridge_token);
+            DriverManager.getWebDriver().findElement(Locators.bridge_token);
             present = true;
         } catch (Exception e) {
             present = false;
@@ -175,16 +168,13 @@ public class StepDefination {
         if (present == true) {
 
             try {
-                DriverAction.click(locators.bridge_token, "Bridge token Button", "Click was successful");
+                DriverAction.click(Locators.bridge_token, "Bridge token Button", "Click was successful");
                 String s = DriverAction.getCurrentURL();
-
                 if (s.contains("bridge-token")) {
                     GemTestReporter.addTestStep("Bridge Token window", "Window was opened successfully", STATUS.PASS);
                 } else {
                     GemTestReporter.addTestStep("Bridge Token window", "Window was not opened successfully", STATUS.FAIL);
-
                 }
-
             } catch (Exception e) {
                 e.printStackTrace();
                 GemTestReporter.addTestStep("Status of Bridge Token button", "Clicked Failed", STATUS.FAIL);
@@ -198,9 +188,9 @@ public class StepDefination {
     @Then("Click on Copy Bridge Token")
     public void click_on_copy_bridge_token() {
         DriverAction.waitSec(2);
-        DriverAction.click(locators.home_button);
+        DriverAction.click(Locators.home_button);
         try {
-            DriverAction.click(locators.bridge_token, "Bridge token Button", "Click was successful");
+            DriverAction.click(Locators.bridge_token, "Bridge token Button", "Click was successful");
             String s = DriverAction.getCurrentURL();
             if (s.contains("bridge-token")) {
                 GemTestReporter.addTestStep("Bridge Token window", "Window is opened successfully", STATUS.PASS);
@@ -209,14 +199,14 @@ public class StepDefination {
             }
             boolean present;
             try {
-                DriverManager.getWebDriver().findElement(locators.copy_bridge_token);
+                DriverManager.getWebDriver().findElement(Locators.copy_bridge_token);
                 present = true;
             } catch (Exception e) {
                 present = false;
             }
             if (present) {
                 try {
-                    DriverAction.click(locators.copy_bridge_token, "copy button", "Click was successful");
+                    DriverAction.click(Locators.copy_bridge_token, "copy button", "Click was successful");
                     DriverAction.waitSec(2);
                     GemTestReporter.addTestStep("Status of Copy button", "clicked Successful", STATUS.PASS, DriverAction.takeSnapShot());
 
@@ -236,17 +226,17 @@ public class StepDefination {
     @Then("Verify the Alert when copy button is clicked")
     public void verify_the_alert_when_copy_button_is_clicked() {
         DriverAction.waitSec(2);
-        DriverAction.click(locators.home_button, "Home button", "Home button was clicked");
+        DriverAction.click(Locators.home_button, "Home button", "Home button was clicked");
         boolean present;
         try {
-            DriverManager.getWebDriver().findElement(locators.bridge_token);
+            DriverManager.getWebDriver().findElement(Locators.bridge_token);
             present = true;
         } catch (Exception e) {
             present = false;
         }
         if (present) {
             try {
-                DriverAction.click(locators.bridge_token, "Bridge token Button", "Bridge token was clicked");
+                DriverAction.click(Locators.bridge_token, "Bridge token Button", "Bridge token was clicked");
                 String s = DriverAction.getCurrentURL();
 
                 if (s.contains("bridge-token")) {
@@ -255,7 +245,7 @@ public class StepDefination {
                     GemTestReporter.addTestStep("AUtolytics window", "Window is not opened successfully", STATUS.FAIL);
                 }
                 try {
-                    DriverAction.click(locators.copy_bridge_token, "copy button", "Copy button was clicked");
+                    DriverAction.click(Locators.copy_bridge_token, "copy button", "Copy button was clicked");
                     DriverAction.waitSec(1);
                     GemTestReporter.addTestStep("Status of Copy button", "clicked Successful", STATUS.PASS, DriverAction.takeSnapShot());
 
@@ -263,7 +253,7 @@ public class StepDefination {
                     e.printStackTrace();
                     GemTestReporter.addTestStep("Status of Copy button", "Not clicked", STATUS.FAIL);
                 }
-                String se = DriverAction.getElement(locators.copy_alert).getText();
+                String se = DriverAction.getElement(Locators.copy_alert).getText();
                 if (se.equals("Copied !")) {
                     GemTestReporter.addTestStep("Alert status", "Expected alert:Copied ", STATUS.PASS);
                 } else {
@@ -275,18 +265,17 @@ public class StepDefination {
             }
         } else {
             GemTestReporter.addTestStep("Status of Bridge Token button", "Not Found", STATUS.FAIL);
-
         }
     }
 
     @Then("Verify the date and time when Change Token button is clicked")
     public void verify_the_date_and_time_when_change_token_button_is_clicked() {
         DriverAction.waitSec(2);
-        DriverAction.click(locators.home_button, "Home button", "Home button was clicked");
+        DriverAction.click(Locators.home_button, "Home button", "Home button was clicked");
         try {
-            DriverAction.click(locators.bridge_token);
+            DriverAction.click(Locators.bridge_token);
             try {
-                DriverAction.click(locators.change_token, "Change token button", "Change Token button was clicked");
+                DriverAction.click(Locators.change_token, "Change token button", "Change Token button was clicked");
                 DriverAction.waitSec(1);
                 GemTestReporter.addTestStep("Status of Change token button", "clicked Successful", STATUS.PASS, DriverAction.takeSnapShot());
 
@@ -296,7 +285,7 @@ public class StepDefination {
             }
 
             DriverAction.waitSec(2);
-            String time = DriverAction.getElement(locators.date_tab).getText();
+            String time = DriverAction.getElement(Locators.date_tab).getText();
             System.out.println(time);
             String timep = time.substring(11, 28);
             SimpleDateFormat formatter = new SimpleDateFormat("MMMM dd,yyyy", Locale.ENGLISH);
@@ -339,7 +328,6 @@ public class StepDefination {
                 GemTestReporter.addTestStep("Comparing time", "Time is matching", STATUS.PASS);
             } else {
                 GemTestReporter.addTestStep("Comparing time", "Time is not matching", STATUS.FAIL);
-
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -351,11 +339,11 @@ public class StepDefination {
     @Then("Verify the Alert when Change Token button is clicked")
     public void verify_the_alert_when_change_token_button_is_clicked() {
         DriverAction.waitSec(2);
-        DriverAction.click(locators.home_button, "Home button", "Home button was clicked");
+        DriverAction.click(Locators.home_button, "Home button", "Home button was clicked");
         try {
-            DriverAction.click(locators.bridge_token);
+            DriverAction.click(Locators.bridge_token);
             try {
-                DriverAction.click(locators.change_token, "Change token button", "Change Token button was clicked");
+                DriverAction.click(Locators.change_token, "Change token button", "Change Token button was clicked");
                 DriverAction.waitSec(1);
                 GemTestReporter.addTestStep("Status of Change token button", "clicked Successful", STATUS.PASS, DriverAction.takeSnapShot());
 
@@ -363,7 +351,7 @@ public class StepDefination {
                 e.printStackTrace();
                 GemTestReporter.addTestStep("Status of Change Token button", "Not clicked", STATUS.FAIL);
             }
-            String fi = DriverAction.getElement(locators.change_token_alert).getText();
+            String fi = DriverAction.getElement(Locators.change_token_alert).getText();
             if (fi.contains("Bridge Token Changed Successfully.")) {
                 GemTestReporter.addTestStep("Alert status", "Expected alert:Changed successfully", STATUS.PASS, DriverAction.takeSnapShot());
             } else {
@@ -379,12 +367,12 @@ public class StepDefination {
     @Then("Click and verify the Logout button")
     public void click_and_verify_the_logout_button() {
         DriverAction.waitSec(2);
-        DriverAction.click(locators.home_button, "Home button", "Home Button was clicked");
+        DriverAction.click(Locators.home_button, "Home button", "Home Button was clicked");
         try {
             DriverAction.waitSec(3);
-            DriverAction.click(locators.pelement, "Profile Element", "Successfully clicked on the Profile");
+            DriverAction.click(Locators.pelement, "Profile Element", "Successfully clicked on the Profile");
             DriverAction.waitSec(3);
-            DriverAction.click(locators.lelement, "Logout button", "Successfully clicked on the logout button");
+            DriverAction.click(Locators.lelement, "Logout button", "Successfully clicked on the logout button");
             DriverAction.waitSec(2);
 
             String titlee = DriverAction.getCurrentURL();
@@ -403,10 +391,10 @@ public class StepDefination {
     @Then("Verify the content of the Home screen")
     public void verify_the_content_of_the_home_screen() {
         DriverAction.waitSec(2);
-        DriverAction.click(locators.home_button, "Home Button", "Successfully clicked on the Home button");
+        DriverAction.click(Locators.home_button, "Home Button", "Successfully clicked on the Home button");
         GemTestReporter.addTestStep("Successfully clicked", "Jewel Window", STATUS.INFO, DriverAction.takeSnapShot());
         try {
-            String text = DriverAction.getElement(locators.page_title).getText();
+            String text = DriverAction.getElement(Locators.page_title).getText();
             System.out.println(text);
             if (text.equals("Jewel Applications")) {
                 GemTestReporter.addTestStep("Title validation", "Expected Title:Jewel Applications", STATUS.PASS);
@@ -422,10 +410,10 @@ public class StepDefination {
     @Then("Verify the Cards present on the home screen")
     public void verify_the_cards_present_on_the_home_screen() {
         DriverAction.waitSec(2);
-        DriverAction.click(locators.home_button, "Home Button", "Successfully clicked on the Home button");
+        DriverAction.click(Locators.home_button, "Home Button", "Successfully clicked on the Home button");
 
         try {
-            List num = DriverAction.getElements(locators.cards);
+            List num = DriverAction.getElements(Locators.cards);
             if (num.size() == 2) {
                 GemTestReporter.addTestStep("Number of Cards Present ", "Expcted :2", STATUS.PASS);
             } else {
@@ -442,10 +430,10 @@ public class StepDefination {
     @Then("Verify the Autolytics Cards present on the home screen")
     public void verify_the_autolytics_cards_present_on_the_home_screen() {
         DriverAction.waitSec(2);
-        DriverAction.click(locators.home_button, "Home Button", "Successfully clicked on the Home button");
+        DriverAction.click(Locators.home_button, "Home Button", "Successfully clicked on the Home button");
         try {
 
-            String nuam = DriverAction.getElement(locators.card_one).getText();
+            String nuam = DriverAction.getElement(Locators.card_one).getText();
 
             if (nuam.equals("Autolytics")) {
                 GemTestReporter.addTestStep("Validating the Autolytics card", "Expcted :Autolytics", STATUS.PASS);
@@ -463,11 +451,11 @@ public class StepDefination {
     @Then("Verify the Autolytics Card Content")
     public void verify_the_autolytics_card_content() {
         DriverAction.waitSec(2);
-        DriverAction.click(locators.home_button, "Home button", "Home button was clicked successfully");
+        DriverAction.click(Locators.home_button, "Home button", "Home button was clicked successfully");
 
         try {
 
-            String nuam = DriverAction.getElement(locators.content_card_one).getText();
+            String nuam = DriverAction.getElement(Locators.content_card_one).getText();
             System.out.println(nuam);
             if (nuam.equals("Autolytics provides the feature for generating descriptive reports to analyze the Testcases/Suite details and also enables users to share them effortlessly.")) {
                 GemTestReporter.addTestStep("Validating the Autolytics card Content", "Expcted :Autolytics provides the feature for generating descriptive reports to analyze the Testcases/Suite details and also enables users to share them effortlessly.", STATUS.PASS);
@@ -485,11 +473,11 @@ public class StepDefination {
     @Then("Verify if the Bridge token card is visible")
     public void verify_if_the_bridge_token_card_is_visible() {
         DriverAction.waitSec(2);
-        DriverAction.click(locators.home_button, "Home Button", "Home button was clicked successfully");
+        DriverAction.click(Locators.home_button, "Home Button", "Home button was clicked successfully");
 
         try {
 
-            String nuam = DriverAction.getElement(locators.card_two).getText();
+            String nuam = DriverAction.getElement(Locators.card_two).getText();
 
             if (nuam.equals("Bridge Token")) {
                 GemTestReporter.addTestStep("Validating the Bridge Token card", "Expcted :Bridge Token", STATUS.PASS);
@@ -506,11 +494,11 @@ public class StepDefination {
     @Then("Validate the content of the Bridge Token card")
     public void validate_the_content_of_the_bridge_token_card() {
         DriverAction.waitSec(2);
-        DriverAction.click(locators.home_button, "Home Button", "Home button was clicked successfully");
+        DriverAction.click(Locators.home_button, "Home Button", "Home button was clicked successfully");
 
         try {
 
-            String nuam = DriverAction.getElement(locators.content_card_two).getText();
+            String nuam = DriverAction.getElement(Locators.content_card_two).getText();
             System.out.println(nuam);
             if (nuam.equals("Keeping in mind the Secure/Safe utilization, Jewel authenticates each user with a Bridge Token which can also be changed or retrieved back as per convenience.")) {
                 GemTestReporter.addTestStep("Validating the Bridge Token card Content", "Expcted :Keeping in mind the Secure/Safe utilization, Jewel authenticates each user with a Bridge Token which can also be changed or retrieved back as per convenience.", STATUS.PASS);
@@ -527,17 +515,17 @@ public class StepDefination {
     @Then("Validate alert ,username and status of the window button")
     public void validate_alert_username_and_status_of_the_window_button() {
         try {
-            DriverAction.click(locators.home_button, "Home Button", "Home button was clicked successfully");
+            DriverAction.click(Locators.home_button, "Home Button", "Home button was clicked successfully");
 
             DriverAction.waitSec(2);
 //            GemTestReporter.addTestStep("Login Success", "Successfully Logged in!!", STATUS.PASS);
-            String s = DriverAction.getElementText(locators.login_alert);
+            String s = DriverAction.getElementText(Locators.login_alert);
             System.out.println(s);
             GemTestReporter.addTestStep("Alert Text", s, STATUS.INFO);
             DriverAction.waitSec(5);
             DriverAction.waitSec(5);
             try {
-                DriverAction.click(locators.three_lines_button, "Three Lines button", "Successfully clicked on the three lines ");
+                DriverAction.click(Locators.three_lines_button, "Three Lines button", "Successfully clicked on the three lines ");
                 GemTestReporter.addTestStep("Button Status", "Clicked on the button", STATUS.PASS);
 
             } catch (Exception e) {
@@ -545,14 +533,14 @@ public class StepDefination {
 
             }
             DriverAction.waitSec(2);
-            String y = DriverAction.getElementText(locators.home_button);
+            String y = DriverAction.getElementText(Locators.home_button);
             if (y == "Home") {
                 GemTestReporter.addTestStep("Status of the side window", "Whole text is appearing", STATUS.INFO);
             } else {
                 GemTestReporter.addTestStep("Status of the side window", "Only icons are appearing", STATUS.INFO);
             }
             try {
-                DriverAction.click(locators.profile, "Usernane button", "Successfully clicked on the Username button");
+                DriverAction.click(Locators.profile, "Usernane button", "Successfully clicked on the Username button");
                 DriverAction.waitSec(2);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -567,11 +555,11 @@ public class StepDefination {
     @Then("Validate if there is change token button available ,if so click it")
     public void validate_if_there_is_change_token_button_available_if_so_click_it() {
         DriverAction.waitSec(2);
-        DriverAction.click(locators.home_button, "Home Button", "Home button was clicked successfully");
+        DriverAction.click(Locators.home_button, "Home Button", "Home button was clicked successfully");
 
         boolean present;
         try {
-            DriverManager.getWebDriver().findElement(locators.bridge_token);
+            DriverManager.getWebDriver().findElement(Locators.bridge_token);
             present = true;
         } catch (Exception e) {
             present = false;
@@ -580,12 +568,12 @@ public class StepDefination {
             try {
 
 
-                DriverAction.click(locators.bridge_token, "Bridge Token button", "Button was clicked successfully");
+                DriverAction.click(Locators.bridge_token, "Bridge Token button", "Button was clicked successfully");
 
                 try {
 
 
-                    DriverAction.click(locators.change_token, "Change token button", "Button was clicked Successfully");
+                    DriverAction.click(Locators.change_token, "Change token button", "Button was clicked Successfully");
                     DriverAction.waitSec(1);
                     GemTestReporter.addTestStep("Status of Change token button", "clicked Successful", STATUS.PASS, DriverAction.takeSnapShot());
 
@@ -617,7 +605,7 @@ public class StepDefination {
     @Then("Click on the Sign up Button")
     public void click_on_the_sign_up_button() {
         DriverAction.waitSec(3);
-        DriverAction.click(locators.signup_button, "Sign up button", "Successfully clicked");
+        DriverAction.click(Locators.signup_button, "Sign up button", "Successfully clicked");
         DriverAction.waitSec(3);
         GemTestReporter.addTestStep("Sign up screen", "Loaded", STATUS.INFO, DriverAction.takeSnapShot());
     }
@@ -625,31 +613,31 @@ public class StepDefination {
     @Then("Enter random username")
     public void enter_random_username() {
         DriverAction.waitSec(2);
-        DriverAction.typeText(locators.first_name, "Hello");
+        DriverAction.typeText(Locators.first_name, "Hello");
         DriverAction.waitSec(3);
     }
 
     @Then("Enter all the fields and Validate the status")
     public void enter_all_the_fields_and_validate_the_status() {
         DriverAction.waitSec(2);
-        DriverAction.typeText(locators.last_name, "Jewel", "Last Name");
+        DriverAction.typeText(Locators.last_name, "Jewel", "Last Name");
         DriverAction.waitSec(2);
-        DriverAction.typeText(locators.user_name, "test1" + System.currentTimeMillis(), "Username");
+        DriverAction.typeText(Locators.user_name, "test1" + System.currentTimeMillis(), "Username");
         DriverAction.waitSec(2);
 
-        DriverAction.typeText(locators.email, "test.jew@geminisolutions.com", "Test.jewel@geminisolutions.com");
+        DriverAction.typeText(Locators.email, "test.jew@geminisolutions.com", "Test.jewel@geminisolutions.com");
 
         GemTestReporter.addTestStep("Status of username", "Clicked successfully", STATUS.INFO, DriverAction.takeSnapShot());
-        DriverAction.typeText(locators.password, "Hellothere", "Password");
+        DriverAction.typeText(Locators.password, "Hellothere", "Password");
         DriverAction.waitSec(2);
-        DriverAction.typeText(locators.confirm_pass, "Hellothere", "Confirm Password");
+        DriverAction.typeText(Locators.confirm_pass, "Hellothere", "Confirm Password");
         DriverAction.waitSec(2);
-        DriverAction.typeText(locators.company_name, "Gemini solutions", "Company Name");
-        DriverAction.click(locators.register_button, "Register button", "Successfully clicked on the Register Button");
+        DriverAction.typeText(Locators.company_name, "Gemini solutions", "Company Name");
+        DriverAction.click(Locators.register_button, "Register button", "Successfully clicked on the Register Button");
         DriverAction.waitSec(1);
 //button[text()='Register']
 
-        String text = DriverAction.getElement(locators.register_alert).getText();
+        String text = DriverAction.getElement(Locators.register_alert).getText();
         System.out.println(text);
         if (text.equals("User Registered.")) {
             GemTestReporter.addTestStep("User Registered Status", "User Registered Successfully", STATUS.PASS, DriverAction.takeSnapShot());
@@ -719,44 +707,44 @@ public class StepDefination {
 
     public void addnewtabs() {
         DriverAction.click(By.xpath("//div[text()='Autolytics']"), "Report", "Autolytics button");
-        DriverAction.click(locators.create_report, "Create Report", "Clicked Successful");
+        DriverAction.click(Locators.create_report, "Create Report", "Clicked Successful");
         DriverAction.waitSec(4);
-        DriverAction.click(locators.report_name_button, "Clicked on Report name was successful");
+        DriverAction.click(Locators.report_name_button, "Clicked on Report name was successful");
         DriverAction.waitSec(2);
-        DriverAction.click(locators.suite_run, "Suite run Report", "Successfully clicked on Suite Run  report");
+        DriverAction.click(Locators.suite_run, "Suite run Report", "Successfully clicked on Suite Run  report");
         DriverAction.waitSec(2);
-        DriverAction.click(locators.project_name, "Project name", "Clicked on the Project name");
+        DriverAction.click(Locators.project_name, "Project name", "Clicked on the Project name");
         DriverAction.waitSec(2);
-        DriverAction.click(locators.project_name_selection, "Select from the dropdown", "Successfully clicked on JEWEL_UI_JV");
+        DriverAction.click(Locators.project_name_selection, "Select from the dropdown", "Successfully clicked on JEWEL_UI_JV");
         DriverAction.waitSec(2);
-        DriverAction.click(locators.cross_button, "Cross button", "successfully clicked");
+        DriverAction.click(Locators.cross_button, "Cross button", "successfully clicked");
         DriverAction.waitSec(2);
-        DriverAction.click(locators.env_tab, "Environment selection", "Successfully clicked on the Environment button");
+        DriverAction.click(Locators.env_tab, "Environment selection", "Successfully clicked on the Environment button");
         DriverAction.waitSec(2);
-        DriverAction.click(locators.select_env, "Select the Environment", "Successfully selected the environment");
+        DriverAction.click(Locators.select_env, "Select the Environment", "Successfully selected the environment");
         DriverAction.waitSec(2);
-        DriverAction.click(locators.cbutton, "Cross button", "Successfully clicked on the cross button");
+        DriverAction.click(Locators.cbutton, "Cross button", "Successfully clicked on the cross button");
         DriverAction.waitSec(2);
 
-        DriverAction.click(locators.date_range_tab, "Select Date Range", "Successfully clicked on the date range tab");
+        DriverAction.click(Locators.date_range_tab, "Select Date Range", "Successfully clicked on the date range tab");
         DriverAction.waitSec(2);
-        DriverAction.click(locators.select_date, "Select value", "Successfully selected the value");
+        DriverAction.click(Locators.select_date, "Select value", "Successfully selected the value");
         DriverAction.waitSec(2);
-        DriverAction.click(locators.generate_button, "Generate button", "Click was successful");
+        DriverAction.click(Locators.generate_button, "Generate button", "Click was successful");
         DriverAction.waitSec(3);
 
     }
 
-    List<WebElement> hi = DriverAction.getElements(locators.left_tabs);
+    List<WebElement> hi = DriverAction.getElements(Locators.left_tabs);
 
     @Then("Open few tabs")
     public void open_few_tabs() {
 
         for (int i = 0; i < 3; i++) {
-            DriverAction.click(locators.new_tab, "New Tab Button", "Clicked Successful");
+            DriverAction.click(Locators.new_tab, "New Tab Button", "Clicked Successful");
             addnewtabs();
         }
-        List<WebElement> hi = DriverAction.getElements(locators.left_tabs);
+        List<WebElement> hi = DriverAction.getElements(Locators.left_tabs);
         if (hi.size() == 4) {
             GemTestReporter.addTestStep("Number of Tabs", "Expected :4", STATUS.PASS);
         } else {
@@ -766,11 +754,11 @@ public class StepDefination {
 
     @Then("Click on SLide left button")
     public void Click_on_SLide_left_button() {
-        DriverAction.click(locators.left_most_tab, "Left Most Tab", "Clicked Successful");
+        DriverAction.click(Locators.left_most_tab, "Left Most Tab", "Clicked Successful");
         DriverAction.waitSec(2);
         DriverAction.switchToActiveElement();
 
-        WebElement l = DriverAction.getElement(locators.tab_select);
+        WebElement l = DriverAction.getElement(Locators.tab_select);
 
 //activeElement() to verify element focused
         String element = l.getAttribute("aria-selected");
@@ -785,9 +773,9 @@ public class StepDefination {
 
     @Then("Click on the SLide most Right button")
     public void click_on_the_s_lide_most_right_button() {
-        DriverAction.click(locators.right_most_tab, "Right Most Tab", "Clicked Successful");
+        DriverAction.click(Locators.right_most_tab, "Right Most Tab", "Clicked Successful");
         DriverAction.waitSec(1);
-        WebElement l = DriverAction.getElement(locators.tabs);
+        WebElement l = DriverAction.getElement(Locators.tabs);
 
 //activeElement() to verify element focused
         String element = l.getAttribute("aria-selected");
@@ -805,11 +793,11 @@ public class StepDefination {
         try {
 
 
-            DriverAction.click(locators.slide_left, "Slide Left Tab button", "Successfully clickeb");
+            DriverAction.click(Locators.slide_left, "Slide Left Tab button", "Successfully clickeb");
 
 
             DriverAction.waitSec(1);
-            WebElement l = DriverAction.getElement(locators.parent_tab);
+            WebElement l = DriverAction.getElement(Locators.parent_tab);
 
 
             String element = l.getAttribute("aria-selected");
@@ -829,11 +817,11 @@ public class StepDefination {
     @Then("Click on the Slide to next right button")
     public void click_on_the_slide_to_next_right_button() {
         try {
-            DriverAction.click(locators.slide_right, "Slide Right Tab button", "Successfully clicked");
+            DriverAction.click(Locators.slide_right, "Slide Right Tab button", "Successfully clicked");
 
 
             DriverAction.waitSec(1);
-            WebElement l = DriverAction.getElement(locators.tabs);
+            WebElement l = DriverAction.getElement(Locators.tabs);
 
 
             String element = l.getAttribute("aria-selected");
@@ -860,7 +848,7 @@ public class StepDefination {
     public void open_a_new_tab() throws IOException, UnsupportedFlavorException {
         addnewtabs();
         DriverAction.waitSec(5);
-        DriverAction.click(locators.copy_report_link);
+        DriverAction.click(Locators.copy_report_link);
         DriverAction.waitSec(4);
 
         ((JavascriptExecutor) DriverManager.getWebDriver()).executeScript("window.open()");// launching a new tab
@@ -883,7 +871,7 @@ public class StepDefination {
             GemTestReporter.addTestStep("Current Url", url, STATUS.PASS);
 
 
-            String s = DriverAction.getElement(locators.check_text_of_report).getText();
+            String s = DriverAction.getElement(Locators.check_text_of_report).getText();
             if (s.equalsIgnoreCase("Shared Report")) {
                 GemTestReporter.addTestStep("Heading validation", "Expected: Shared Report", STATUS.PASS);
             } else {
@@ -912,7 +900,7 @@ public class StepDefination {
     @Then("Logout the Account")
     public void logout_the_account() throws IOException, UnsupportedFlavorException {
         addnewtabs();
-        DriverAction.click(locators.copy_report_link);
+        DriverAction.click(Locators.copy_report_link);
         DriverAction.waitSec(4);
 
 
@@ -938,9 +926,9 @@ public class StepDefination {
     @Given("^user clicks on logIn button and closes it$")
     public void logIn() throws Exception {
         DriverAction.waitSec(2);
-        DriverAction.click(locators.logIn, "Click on login button", "Click on login button is successful");
+        DriverAction.click(Locators.logIn, "Click on login button", "Click on login button is successful");
         DriverAction.waitSec(2);
-        DriverAction.click(locators.close);
+        DriverAction.click(Locators.close);
         DriverAction.waitSec(2);
         GemTestReporter.addTestStep("Click on cross button", "Click on cross button is successful", STATUS.PASS, DriverAction.takeSnapShot());
     }
@@ -948,28 +936,28 @@ public class StepDefination {
     @Then("^user again clicks on logIn button and enters (.+) and (.+)")
     public void loginPage(String Username, String Password) throws Exception {
         DriverAction.waitSec(1);
-        DriverAction.click(locators.logIn);
+        DriverAction.click(Locators.logIn);
         DriverAction.waitSec(2);
-        DriverAction.click(locators.username);
+        DriverAction.click(Locators.username);
         DriverAction.waitSec(1);
-        DriverAction.typeText(locators.username, Username, "Enter Username", "Username has been entered: " + Username + " ");
+        DriverAction.typeText(Locators.username, Username, "Enter Username", "Username has been entered: " + Username + " ");
         DriverAction.waitSec(1);
-        DriverAction.click(locators.passwordm);
+        DriverAction.click(Locators.passwordm);
         DriverAction.waitSec(1);
-        DriverAction.typeText(locators.passwordm, Password);
+        DriverAction.typeText(Locators.passwordm, Password);
         DriverAction.waitSec(1);
         GemTestReporter.addTestStep("Enter Password", "Password has been entered: " + Password + " ", STATUS.PASS, DriverAction.takeSnapShot());
         DriverAction.waitSec(3);
-        DriverAction.click(locators.eye, "Click on open eye button", "Click on open eye button successful");
+        DriverAction.click(Locators.eye, "Click on open eye button", "Click on open eye button successful");
         DriverAction.waitSec(1);
-        DriverAction.click(locators.eyeclose, "Click on close eye button", "Click on close eye button successful");
+        DriverAction.click(Locators.eyeclose, "Click on close eye button", "Click on close eye button successful");
         DriverAction.waitSec(1);
     }
 
     @Then("^user navigates back after loggin in$")
     public void logout() throws Exception {
         DriverAction.waitSec(2);
-        DriverAction.click(locators.LoginButton);
+        DriverAction.click(Locators.LoginButton);
         DriverAction.waitSec(4);
         GemTestReporter.addTestStep("Logged in", "Logged in inside website", STATUS.PASS, DriverAction.takeSnapShot());
         DriverAction.navigateBack();
@@ -989,7 +977,7 @@ public class StepDefination {
 
     @Then("^click on pricing$")
     public void pricing() throws Exception {
-        DriverAction.click(locators.pricing, "Click on pricing", "Click on pricing successful");
+        DriverAction.click(Locators.pricing, "Click on pricing", "Click on pricing successful");
         DriverAction.waitSec(2);
     }
 
@@ -1007,9 +995,9 @@ public class StepDefination {
     @Given("^clicking on pricing and checking for main heading (.+)$")
     public void clickpricing(String pricingHead) throws Exception {
         DriverAction.waitSec(2);
-        DriverAction.click(locators.pricing);
+        DriverAction.click(Locators.pricing);
         DriverAction.waitSec(4);
-        String s3 = DriverAction.getElementText(locators.pricingheading);
+        String s3 = DriverAction.getElementText(Locators.pricingheading);
         if (s3.equals(pricingHead)) {
             GemTestReporter.addTestStep("Pricing heading validation", "Successful<br>Expected heading1: " + pricingHead + "<br>Actual heading1: " + s3, STATUS.PASS);
         } else {
@@ -1019,7 +1007,7 @@ public class StepDefination {
 
     @Then("^checking for subheading (.+)$")
     public void subheading(String pricingSubHead) throws Exception {
-        String s4 = DriverAction.getElementText(locators.pricingsubheading);
+        String s4 = DriverAction.getElementText(Locators.pricingsubheading);
         if (s4.equals(pricingSubHead)) {
             GemTestReporter.addTestStep("Pricing heading2 validation", "Successful<br>Expected heading2: " + pricingSubHead + "<br>Actual heading2: " + s4, STATUS.PASS);
         } else {
@@ -1029,7 +1017,7 @@ public class StepDefination {
 
     @Then("^checking for text (.+)$")
     public void text(String Text) throws Exception {
-        String s4 = DriverAction.getElementText(locators.pricingcontent);
+        String s4 = DriverAction.getElementText(Locators.pricingcontent);
         if (s4.equals(Text)) {
             GemTestReporter.addTestStep("Pricing content validation", "Successful<br>Expected Pricing content: " + Text + "<br>Actual Pricing content: " + s4, STATUS.PASS);
         } else {
@@ -1040,7 +1028,7 @@ public class StepDefination {
     @Given("^clicking on jewel again validating main heading (.+)$")
     public void jewelhead(String mainHeading) {
         DriverAction.waitSec(3);
-        String s5 = DriverAction.getElementText(locators.jewelheading);
+        String s5 = DriverAction.getElementText(Locators.jewelheading);
         if (s5.equals(mainHeading)) {
             GemTestReporter.addTestStep("Jewel heading validation", "Successful<br>Expected heading: " + mainHeading + "<br>Actual head: " + s5, STATUS.PASS);
         } else {
@@ -1050,7 +1038,7 @@ public class StepDefination {
 
     @Then("^validating subheading of jewel (.+)$")
     public void jewelShead(String subHeading) {
-        String s6 = DriverAction.getElementText(locators.jewelsubheading);
+        String s6 = DriverAction.getElementText(Locators.jewelsubheading);
         if (s6.equals(subHeading)) {
             GemTestReporter.addTestStep("Jewel content validation", "Successful<br>Expected content: " + subHeading + "<br>Actual content: " + s6, STATUS.PASS);
         } else {
@@ -1064,7 +1052,7 @@ public class StepDefination {
         DriverAction.pageScroll(500, 500, false);
         DriverAction.waitSec(3);
         GemTestReporter.addTestStep("Scrolling down", "Scrolling is successful", STATUS.PASS, DriverAction.takeSnapShot());
-        String s7 = DriverAction.getElementText(locators.whatisjewel);
+        String s7 = DriverAction.getElementText(Locators.whatisjewel);
         if (s7.equals(whatisjewel)) {
             GemTestReporter.addTestStep("What is jewel validation", "Successful<br>Expected content: " + whatisjewel + "<br>Actual content: " + s7, STATUS.PASS);
         } else {
@@ -1074,7 +1062,7 @@ public class StepDefination {
 
     @Then("^validating about us (.+)$")
     public void aboutus(String aboutus) {
-        String s8 = DriverAction.getElementText(locators.aboutus);
+        String s8 = DriverAction.getElementText(Locators.aboutus);
         if (s8.equals(aboutus)) {
             GemTestReporter.addTestStep("About us validation", "Successful<br>Expected content: " + aboutus + "<br>Actual content: " + s8, STATUS.PASS);
         } else {
@@ -1084,7 +1072,7 @@ public class StepDefination {
 
     @Then("^validating content (.+)$")
     public void content(String content) {
-        String s9 = DriverAction.getElementText(locators.content);
+        String s9 = DriverAction.getElementText(Locators.content);
         if (s9.contains(content)) {
             GemTestReporter.addTestStep("Content validation", "Successful<br>Expected content: " + s9 + "<br>Actual content: " + s9, STATUS.PASS);
         } else {
@@ -1097,7 +1085,7 @@ public class StepDefination {
         DriverAction.waitSec(1);
         DriverAction.pageScroll(500, 500, true);
         DriverAction.waitSec(3);
-        String s10 = DriverAction.getElementText(locators.viewreport);
+        String s10 = DriverAction.getElementText(Locators.viewreport);
         if (s10.contains(viewreport)) {
             GemTestReporter.addTestStep("View report validation", "Successful<br>Expected heading: " + s10 + "<br>Actual content: " + s10, STATUS.PASS);
         } else {
@@ -1107,7 +1095,7 @@ public class StepDefination {
 
     @Then("^validating view reportC (.+)$")
     public void viewcontent(String viewcontent) {
-        String s11 = DriverAction.getElementText(locators.viewreportcontent);
+        String s11 = DriverAction.getElementText(Locators.viewreportcontent);
         if (s11.equals(viewcontent)) {
             GemTestReporter.addTestStep("View report content validation", "Successful<br>Expected content: " + s11 + "<br>Actual content: " + s11, STATUS.PASS);
         } else {
@@ -1121,7 +1109,7 @@ public class StepDefination {
         DriverAction.pageScroll(1000, 1000, false);
         DriverAction.waitSec(3);
         GemTestReporter.addTestStep("Scrolling down", "Scrolling is successful", STATUS.INFO, DriverAction.takeSnapShot());
-        String s12 = DriverAction.getElementText(locators.runtest);
+        String s12 = DriverAction.getElementText(Locators.runtest);
         if (s12.equals(runtest)) {
             GemTestReporter.addTestStep("Run test suite validation", "Sucessfull<br>Expected content: " + s12 + "<br>Actual content: " + s12, STATUS.PASS);
         } else {
@@ -1131,7 +1119,7 @@ public class StepDefination {
 
     @Then("^validating run testC (.+)$")
     public void runsuite(String runcontentC) {
-        String s13 = DriverAction.getElementText(locators.runtestc);
+        String s13 = DriverAction.getElementText(Locators.runtestc);
         if (runcontentC.contains(s13)) {
             GemTestReporter.addTestStep("Run test suite content validation", "Successful<br>Expected content: " + s13 + "<br>Actual content: " + s13, STATUS.PASS);
         } else {
@@ -1144,7 +1132,7 @@ public class StepDefination {
         DriverAction.waitSec(1);
         DriverAction.pageScroll(1500, 1500, true);
         DriverAction.waitSec(2);
-        DriverAction.click(locators.facebook);
+        DriverAction.click(Locators.facebook);
         DriverAction.waitSec(2);
         ArrayList<String> newTb = new ArrayList<>(DriverAction.getWindowHandles());
         DriverAction.waitSec(2);
@@ -1171,7 +1159,7 @@ public class StepDefination {
         DriverAction.waitSec(1);
         DriverAction.pageScroll(1500, 1500, true);
         DriverAction.waitSec(2);
-        DriverAction.click(locators.twitter);
+        DriverAction.click(Locators.twitter);
         ArrayList<String> newTb1 = new ArrayList<>(DriverAction.getWindowHandles());
         DriverAction.waitSec(2);
         DriverAction.switchToWindow(newTb1.get(1));
@@ -1195,7 +1183,7 @@ public class StepDefination {
         DriverAction.waitSec(1);
         DriverAction.pageScroll(1500, 1500, true);
         DriverAction.waitSec(2);
-        DriverAction.click(locators.instagram);
+        DriverAction.click(Locators.instagram);
         ArrayList<String> newTb2 = new ArrayList<>(DriverAction.getWindowHandles());
         DriverAction.waitSec(2);
         DriverAction.switchToWindow(newTb2.get(1));
@@ -1219,7 +1207,7 @@ public class StepDefination {
         DriverAction.waitSec(1);
         DriverAction.pageScroll(1500, 1500, true);
         DriverAction.waitSec(2);
-        DriverAction.click(locators.linkedin);
+        DriverAction.click(Locators.linkedin);
         ArrayList<String> newTb3 = new ArrayList<>(DriverAction.getWindowHandles());
         DriverAction.waitSec(2);
         DriverAction.switchToWindow(newTb3.get(1));
@@ -1243,7 +1231,7 @@ public class StepDefination {
         DriverAction.waitSec(1);
         DriverAction.pageScroll(1500, 1500, false);
         DriverAction.waitSec(2);
-        DriverAction.click(locators.jeweldashboard);
+        DriverAction.click(Locators.jeweldashboard);
         DriverAction.waitSec(2);
         GemTestReporter.addTestStep("Click on Feature Jewel dashboard", "Click on Feature Jewel dashboard successful", STATUS.PASS, DriverAction.takeSnapShot());
     }
@@ -1253,7 +1241,7 @@ public class StepDefination {
         DriverAction.waitSec(1);
         DriverAction.pageScroll(1500, 1500, true);
         DriverAction.waitSec(2);
-        DriverAction.click(locators.gempyp);
+        DriverAction.click(Locators.gempyp);
         ArrayList<String> newTb4 = new ArrayList<>(DriverAction.getWindowHandles());
         DriverAction.waitSec(2);
         DriverAction.switchToWindow(newTb4.get(1));
@@ -1277,7 +1265,7 @@ public class StepDefination {
         DriverAction.waitSec(1);
         DriverAction.pageScroll(1500, 1500, true);
         DriverAction.waitSec(2);
-        DriverAction.click(locators.gemprf);
+        DriverAction.click(Locators.gemprf);
         ArrayList<String> newTb5 = new ArrayList<>(DriverAction.getWindowHandles());
         DriverAction.waitSec(2);
         DriverAction.switchToWindow(newTb5.get(1));
@@ -1301,7 +1289,7 @@ public class StepDefination {
         DriverAction.waitSec(1);
         DriverAction.pageScroll(1500, 1500, true);
         DriverAction.waitSec(2);
-        DriverAction.click(locators.gemjar);
+        DriverAction.click(Locators.gemjar);
         ArrayList<String> newTb6 = new ArrayList<>(DriverAction.getWindowHandles());
         DriverAction.waitSec(2);
         DriverAction.switchToWindow(newTb6.get(1));
@@ -1325,7 +1313,7 @@ public class StepDefination {
         DriverAction.waitSec(1);
         DriverAction.pageScroll(1500, 1500, false);
         DriverAction.waitSec(2);
-        DriverAction.click(locators.pricingbutton);
+        DriverAction.click(Locators.pricingbutton);
         DriverAction.waitSec(2);
         GemTestReporter.addTestStep("Click on company pricing", "Click on company pricing successful", STATUS.PASS, DriverAction.takeSnapShot());
     }
@@ -1333,35 +1321,35 @@ public class StepDefination {
     @Given("^click on signup$")
     public void signup() throws Exception {
         DriverAction.waitSec(1);
-        DriverAction.click(locators.signup);
+        DriverAction.click(Locators.signup);
         DriverAction.waitSec(1);
     }
 
     @Then("enter {string} {string} {string} {string} {string} {string} {string}")
     public void signupPage(String name, String last, String user, String email, String pass, String cpass, String company) throws Exception {
-        DriverAction.click(locators.firstname);
-        DriverAction.typeText(locators.firstname, name, "Enter Firstname", "Firstname has been entered: " + name + " ");
+        DriverAction.click(Locators.firstname);
+        DriverAction.typeText(Locators.firstname, name, "Enter Firstname", "Firstname has been entered: " + name + " ");
         DriverAction.waitSec(1);
-        DriverAction.click(locators.lastname);
-        DriverAction.typeText(locators.lastname, last, "Enter Lastname", "Lastname has been entered: " + last + " ");
+        DriverAction.click(Locators.lastname);
+        DriverAction.typeText(Locators.lastname, last, "Enter Lastname", "Lastname has been entered: " + last + " ");
         DriverAction.waitSec(1);
-        DriverAction.click(locators.username1);
-        DriverAction.typeText(locators.username1, user);
+        DriverAction.click(Locators.username1);
+        DriverAction.typeText(Locators.username1, user);
         DriverAction.waitSec(3);
         GemTestReporter.addTestStep("Enter Username", "Username has been entered: " + user + " ", STATUS.PASS, DriverAction.takeSnapShot());
-        DriverAction.click(locators.emailm);
-        DriverAction.typeText(locators.emailm, email, "Enter Email", "Email has been entered: " + email + " ");
+        DriverAction.click(Locators.emailm);
+        DriverAction.typeText(Locators.emailm, email, "Enter Email", "Email has been entered: " + email + " ");
         DriverAction.waitSec(1);
-        DriverAction.click(locators.password1);
-        DriverAction.typeText(locators.password1, pass, "Enter Password", "Password has been entered: " + pass + " ");
+        DriverAction.click(Locators.password1);
+        DriverAction.typeText(Locators.password1, pass, "Enter Password", "Password has been entered: " + pass + " ");
         DriverAction.waitSec(1);
-        DriverAction.click(locators.confirmpass);
-        DriverAction.typeText(locators.confirmpass, cpass, "Enter Confirm Password", "Confirm password has been entered: " + cpass + " ");
+        DriverAction.click(Locators.confirmpass);
+        DriverAction.typeText(Locators.confirmpass, cpass, "Enter Confirm Password", "Confirm password has been entered: " + cpass + " ");
         DriverAction.waitSec(1);
-        DriverAction.click(locators.companyname);
-        DriverAction.typeText(locators.companyname, company, "Enter Company", "Company name has been entered: " + company + " ");
+        DriverAction.click(Locators.companyname);
+        DriverAction.typeText(Locators.companyname, company, "Enter Company", "Company name has been entered: " + company + " ");
         DriverAction.waitSec(1);
-        DriverAction.click(locators.register);
+        DriverAction.click(Locators.register);
         DriverAction.waitSec(2);
         GemTestReporter.addTestStep("User exists", "User already exists", STATUS.PASS, DriverAction.takeSnapShot());
     }
@@ -1370,59 +1358,59 @@ public class StepDefination {
     @Given("^click on login and enter (.+) and (.+)$")
     public void loginn(String username, String password) throws Exception {
         DriverAction.waitSec(1);
-        DriverAction.click(locators.logIn);
+        DriverAction.click(Locators.logIn);
         DriverAction.waitSec(2);
-        DriverAction.click(locators.username);
+        DriverAction.click(Locators.username);
         DriverAction.waitSec(1);
-        DriverAction.typeText(locators.username, username);
+        DriverAction.typeText(Locators.username, username);
         DriverAction.waitSec(1);
-        DriverAction.click(locators.passwordm);
+        DriverAction.click(Locators.passwordm);
         DriverAction.waitSec(1);
-        DriverAction.typeText(locators.passwordm, password);
+        DriverAction.typeText(Locators.passwordm, password);
         DriverAction.waitSec(1);
-        DriverAction.click(locators.LoginButton);
+        DriverAction.click(Locators.LoginButton);
         DriverAction.waitSec(2);
     }
 
     @Then("^click on autolytics and create report$")
     public void autolytics() throws Exception {
-        DriverAction.click(locators.autolyticsm, "Click on autolytics", "Click on autolytics successful");
+        DriverAction.click(Locators.autolyticsm, "Click on autolytics", "Click on autolytics successful");
         DriverAction.waitSec(2);
-        DriverAction.click(locators.createReport, "Click on create report", "Click on create report successful");
+        DriverAction.click(Locators.createReport, "Click on create report", "Click on create report successful");
         DriverAction.waitSec(2);
     }
 
     @Then("^select report name$")
     public void reportName() throws Exception {
-        DriverAction.click(locators.reportNameScroll, "Click on report name", "Click on report name successful");
+        DriverAction.click(Locators.reportNameScroll, "Click on report name", "Click on report name successful");
         DriverAction.waitSec(1);
-        DriverAction.click(locators.suiteRunReport, "Select suite run report", "Select suite run report successful");
+        DriverAction.click(Locators.suiteRunReport, "Select suite run report", "Select suite run report successful");
         DriverAction.waitSec(1);
     }
 
     @Then("^select project name$")
     public void projectName() throws Exception {
-        DriverAction.click(locators.projectScroll, "Click on project", "Click on project successful");
+        DriverAction.click(Locators.projectScroll, "Click on project", "Click on project successful");
         DriverAction.waitSec(1);
-        DriverAction.click(locators.gemEcoApis, "Select gem-ecosystem API", "Select gem-ecosystem API successful");
+        DriverAction.click(Locators.gemEcoApis, "Select gem-ecosystem API", "Select gem-ecosystem API successful");
         DriverAction.waitSec(1);
     }
 
     @Then("^select enviroment$")
     public void enviromentName() throws Exception {
-        DriverAction.click(locators.enviromentScroll, "Click on environment", "Click on environment successful");
+        DriverAction.click(Locators.enviromentScroll, "Click on environment", "Click on environment successful");
         DriverAction.waitSec(1);
-        DriverAction.click(locators.prod, "Select prod", "Select prod successful");
+        DriverAction.click(Locators.prod, "Select prod", "Select prod successful");
         DriverAction.waitSec(1);
     }
 
     @Then("^select date range and click on generate$")
     public void dateRange() throws Exception {
-        DriverAction.click(locators.dateRangeScroll, "Click on date range", "Click on date range successful");
+        DriverAction.click(Locators.dateRangeScroll, "Click on date range", "Click on date range successful");
         DriverAction.waitSec(1);
-        DriverAction.click(locators.thisYear, "Select this year", "Select this year successful");
+        DriverAction.click(Locators.thisYear, "Select this year", "Select this year successful");
         DriverAction.waitSec(1);
-        DriverAction.click(locators.generate);
+        DriverAction.click(Locators.generate);
         DriverAction.waitSec(4);
         GemTestReporter.addTestStep("Click on Generate button", "Click on Generate button successful", STATUS.PASS, DriverAction.takeSnapShot());
     }
@@ -1430,15 +1418,15 @@ public class StepDefination {
     @Then("^validate sorting of numbers$")
     public void sorting() throws Exception {
         DriverAction.waitSec(1);
-        DriverAction.doubleClick(locators.sno);
+        DriverAction.doubleClick(Locators.sno);
         DriverAction.waitSec(2);
         GemTestReporter.addTestStep("Double click on S No", "Double click on S No successful", STATUS.PASS, DriverAction.takeSnapShot());
         DriverAction.pageScroll(1000, 1000, false);
         DriverAction.waitSec(4);
-        String s3 = DriverAction.getElementText(locators.total);
+        String s3 = DriverAction.getElementText(Locators.total);
         String s4 = s3.substring(6, 8);
 //        int value = Integer.parseInt(s4);
-        String s2 = DriverAction.getElementText(locators.span);
+        String s2 = DriverAction.getElementText(Locators.span);
         if (s2.equals(s4)) {
             GemTestReporter.addTestStep(" Sorting Validation", "Successful<br>Expected Text: " + s2 + "<br>Actual Text: " + s4, STATUS.PASS);
         } else {
@@ -1449,66 +1437,66 @@ public class StepDefination {
     @Given("^click on login and enters (.+) and (.+)$")
     public void loginnn(String usernames, String passwords) throws Exception {
         DriverAction.waitSec(1);
-        DriverAction.click(locators.logIn);
+        DriverAction.click(Locators.logIn);
         DriverAction.waitSec(2);
-        DriverAction.click(locators.username);
+        DriverAction.click(Locators.username);
         DriverAction.waitSec(1);
-        DriverAction.typeText(locators.username, usernames);
+        DriverAction.typeText(Locators.username, usernames);
         DriverAction.waitSec(1);
-        DriverAction.click(locators.passwordm);
+        DriverAction.click(Locators.passwordm);
         DriverAction.waitSec(1);
-        DriverAction.typeText(locators.passwordm, passwords);
+        DriverAction.typeText(Locators.passwordm, passwords);
         DriverAction.waitSec(1);
-        DriverAction.click(locators.LoginButton);
+        DriverAction.click(Locators.LoginButton);
         DriverAction.waitSec(2);
     }
 
     @Then("^click on autolytics and create reports$")
     public void autolyticss() throws Exception {
-        DriverAction.click(locators.autolyticsm);
+        DriverAction.click(Locators.autolyticsm);
         DriverAction.waitSec(2);
-        DriverAction.click(locators.createReport);
+        DriverAction.click(Locators.createReport);
         DriverAction.waitSec(2);
     }
 
     @Then("^select report names$")
     public void reportNames() throws Exception {
-        DriverAction.click(locators.reportNameScroll);
+        DriverAction.click(Locators.reportNameScroll);
         DriverAction.waitSec(1);
-        DriverAction.click(locators.suiteRunReport);
+        DriverAction.click(Locators.suiteRunReport);
         DriverAction.waitSec(1);
     }
 
     @Then("^select project names$")
     public void projectNames() throws Exception {
-        DriverAction.click(locators.projectScroll);
+        DriverAction.click(Locators.projectScroll);
         DriverAction.waitSec(1);
-        DriverAction.click(locators.gemEcoApis);
+        DriverAction.click(Locators.gemEcoApis);
         DriverAction.waitSec(1);
     }
 
     @Then("^select enviroments$")
     public void enviromentNames() throws Exception {
-        DriverAction.click(locators.enviromentScroll);
+        DriverAction.click(Locators.enviromentScroll);
         DriverAction.waitSec(1);
-        DriverAction.click(locators.prod);
+        DriverAction.click(Locators.prod);
         DriverAction.waitSec(1);
     }
 
     @Then("^select date range and click on generates$")
     public void dateRanges() throws Exception {
-        DriverAction.click(locators.dateRangeScroll);
+        DriverAction.click(Locators.dateRangeScroll);
         DriverAction.waitSec(1);
-        DriverAction.click(locators.thisYear);
+        DriverAction.click(Locators.thisYear);
         DriverAction.waitSec(1);
-        DriverAction.click(locators.generate);
+        DriverAction.click(Locators.generate);
         DriverAction.waitSec(4);
     }
 
     @Then("^click on copy button and check if report opens in new tab and click on new tab button and validate (.+) of shared report")
     public void buttons(String sharedurl) throws Exception {
         DriverAction.waitSec(1);
-        DriverAction.click(locators.copyButton);
+        DriverAction.click(Locators.copyButton);
         DriverAction.waitSec(3);
         GemTestReporter.addTestStep("Click on Copy Button", "Click on Copy Button successful", STATUS.PASS, DriverAction.takeSnapShot());
 //        DriverManager.getWebDriver().switchTo().newWindow(WindowType.TAB);
@@ -1517,7 +1505,7 @@ public class StepDefination {
 //        DriverAction.waitSec(2);
 //        DriverManager.getWebDriver().navigate().to(s);
 //        DriverAction.waitSec(6);
-        DriverAction.click(locators.newTab);
+        DriverAction.click(Locators.newTab);
         ArrayList<String> newTb7 = new ArrayList<>(DriverAction.getWindowHandles());
         DriverAction.waitSec(2);
         DriverAction.switchToWindow(newTb7.get(1));
@@ -1538,28 +1526,28 @@ public class StepDefination {
     @Then("^click on create report button$")
     public void createReportButton() throws Exception {
         DriverAction.waitSec(1);
-        DriverAction.click(locators.createReportButton, "Click on create report button", "Click on create report button successful");
+        DriverAction.click(Locators.createReportButton, "Click on create report button", "Click on create report button successful");
         DriverAction.waitSec(1);
-        DriverAction.click(locators.crossCreateReport);
+        DriverAction.click(Locators.crossCreateReport);
         DriverAction.waitSec(2);
     }
 
     @Then("^click on filter status and select pass$")
     public void filter() throws Exception {
-        DriverAction.click(locators.filter);
+        DriverAction.click(Locators.filter);
         DriverAction.waitSec(1);
-        DriverAction.click(locators.selectFilter);
+        DriverAction.click(Locators.selectFilter);
         DriverAction.waitSec(1);
-        DriverAction.click(locators.selectPass);
-        String asert = DriverAction.getElementText(locators.selct_pass_text);
+        DriverAction.click(Locators.selectPass);
+        String asert = DriverAction.getElementText(Locators.selct_pass_text);
         System.out.println(asert);
         DriverAction.waitSec(1);
-        DriverAction.click(locators.closeFilter);
+        DriverAction.click(Locators.closeFilter);
         DriverAction.waitSec(3);
-        System.out.println(locators.selct_pass_text);
+        System.out.println(Locators.selct_pass_text);
         int count = 0;
         int flag = 0;
-        List<String> list = DriverAction.getElementsText(locators.pass);
+        List<String> list = DriverAction.getElementsText(Locators.pass);
         for (int i = 0; i < list.size(); i++) {
             if (asert.equalsIgnoreCase(list.get(i))) {
                 count++;
@@ -1577,17 +1565,17 @@ public class StepDefination {
 
     @Then("^click on exe$")
     public void exe() throws Exception {
-        DriverAction.click(locators.selectFilter1);
+        DriverAction.click(Locators.selectFilter1);
         DriverAction.waitSec(1);
-        DriverAction.click(locators.selectPass);
+        DriverAction.click(Locators.selectPass);
         DriverAction.waitSec(1);
-        DriverAction.click(locators.exe);
+        DriverAction.click(Locators.exe);
         DriverAction.waitSec(1);
-        String asert1 = DriverAction.getElementText(locators.select_exe_text);
+        String asert1 = DriverAction.getElementText(Locators.select_exe_text);
         DriverAction.waitSec(3);
-        DriverAction.click(locators.closeFilter);
+        DriverAction.click(Locators.closeFilter);
         int count1 = 0;
-        List<String> list1 = DriverAction.getElementsText(locators.exe1);
+        List<String> list1 = DriverAction.getElementsText(Locators.exe1);
         for (int i = 0; i < list1.size(); i++) {
             if (asert1.equalsIgnoreCase(list1.get(i))) {
                 count1++;
@@ -1604,17 +1592,17 @@ public class StepDefination {
 
     @Then("^click on fail$")
     public void fail() throws Exception {
-        DriverAction.click(locators.selectFilter1);
+        DriverAction.click(Locators.selectFilter1);
         DriverAction.waitSec(1);
-        DriverAction.click(locators.exe);
+        DriverAction.click(Locators.exe);
         DriverAction.waitSec(1);
-        DriverAction.click(locators.fail);
+        DriverAction.click(Locators.fail);
         DriverAction.waitSec(1);
-        String asert2 = DriverAction.getElementText(locators.select_fail_text);
+        String asert2 = DriverAction.getElementText(Locators.select_fail_text);
         DriverAction.waitSec(3);
-        DriverAction.click(locators.closeFilter);
+        DriverAction.click(Locators.closeFilter);
         int count2 = 0;
-        List<String> list2 = DriverAction.getElementsText(locators.fail1);
+        List<String> list2 = DriverAction.getElementsText(Locators.fail1);
         for (int i = 0; i < list2.size(); i++) {
             if (asert2.equalsIgnoreCase(list2.get(i))) {
                 count2++;
@@ -1631,18 +1619,18 @@ public class StepDefination {
 
     @Then("^click on warn$")
     public void warn() throws Exception {
-        DriverAction.click(locators.selectFilter1);
+        DriverAction.click(Locators.selectFilter1);
         DriverAction.waitSec(1);
-        DriverAction.click(locators.fail);
+        DriverAction.click(Locators.fail);
         DriverAction.waitSec(1);
-        DriverAction.click(locators.warn);
+        DriverAction.click(Locators.warn);
         DriverAction.waitSec(1);
-        String asert3 = DriverAction.getElementText(locators.select_warn_text);
+        String asert3 = DriverAction.getElementText(Locators.select_warn_text);
         DriverAction.waitSec(3);
 //        DriverAction.click(locator.closeFilter);
 //        DriverAction.waitSec(2);
         int count3 = 0;
-        List<String> list3 = DriverAction.getElementsText(locators.warn1);
+        List<String> list3 = DriverAction.getElementsText(Locators.warn1);
         for (int i = 0; i < list3.size(); i++) {
             if (asert3.equalsIgnoreCase(list3.get(i))) {
                 count3++;
@@ -1655,11 +1643,11 @@ public class StepDefination {
             GemTestReporter.addTestStep(" Filter WARN Validation", "Expected:" + asert3, STATUS.INFO);
             GemTestReporter.addTestStep("Filer WARN Validation", "Text we got" + list3.get(0), STATUS.FAIL);
         }
-        DriverAction.click(locators.warn);
+        DriverAction.click(Locators.warn);
         DriverAction.waitSec(1);
-        DriverAction.click(locators.closeFilter);
+        DriverAction.click(Locators.closeFilter);
         DriverAction.waitSec(1);
-        DriverAction.doubleClick(locators.pass);
+        DriverAction.doubleClick(Locators.pass);
         DriverAction.waitSec(2);
     }
 
@@ -1672,18 +1660,18 @@ public class StepDefination {
 //        ((JavascriptExecutor)DriverManager.getWebDriver()).executeScript("window.scrollRight(2000,0)");
         js.executeScript("arguments[0].scrollIntoView();", DriverManager.getWebDriver().findElement(By.xpath("//*[text()='August 17, 2022 6:11:28 PM (IST)']")));
         DriverAction.waitSec(4);
-        DriverAction.click(locators.filter1);
+        DriverAction.click(Locators.filter1);
         DriverAction.waitSec(1);
-        DriverAction.click(locators.selectFilter);
+        DriverAction.click(Locators.selectFilter);
         DriverAction.waitSec(1);
-        DriverAction.click(locators.selectDate);
+        DriverAction.click(Locators.selectDate);
         DriverAction.waitSec(2);
 //        DriverAction.click(locator.closeFilter);
 //        DriverAction.waitSec(2);
-        String asert4 = DriverAction.getElementText(locators.selectDate);
+        String asert4 = DriverAction.getElementText(Locators.selectDate);
         DriverAction.waitSec(3);
         int count4 = 0;
-        List<String> list4 = DriverAction.getElementsText(locators.select_date_text);
+        List<String> list4 = DriverAction.getElementsText(Locators.select_date_text);
         for (int i = 0; i < list4.size(); i++) {
             if (asert4.equalsIgnoreCase(list4.get(i))) {
                 count4++;
@@ -1696,18 +1684,18 @@ public class StepDefination {
             GemTestReporter.addTestStep(" Filter DATE Validation", "Expected:" + asert4, STATUS.INFO);
             GemTestReporter.addTestStep("Filer DATE Validation", "Text we got" + list4.get(0), STATUS.FAIL);
         }
-        DriverAction.click(locators.selectDate);
+        DriverAction.click(Locators.selectDate);
         DriverAction.waitSec(1);
-        DriverAction.click(locators.closeFilter);
+        DriverAction.click(Locators.closeFilter);
         DriverAction.waitSec(1);
     }
 
     @Then("^click on action button and then validate (.+)$")
     public void action(String executionReport) throws Exception {
         DriverAction.waitSec(1);
-        DriverAction.click(locators.action);
+        DriverAction.click(Locators.action);
         DriverAction.waitSec(3);
-        String exe = DriverAction.getElementText(locators.executionR);
+        String exe = DriverAction.getElementText(Locators.executionR);
         if (exe.equals(executionReport)) {
             GemTestReporter.addTestStep("Execution Report tab Validation", "Successful<br>Expected text: " + executionReport + "<br>Actual text: " + exe, STATUS.PASS);
         } else {
@@ -1718,7 +1706,7 @@ public class StepDefination {
     @Then("^click on new tab button and validate (.+) of execution report$")
     public void newtabbb(String executionUrl) throws Exception {
         DriverAction.waitSec(1);
-        DriverAction.click(locators.newtb_button);
+        DriverAction.click(Locators.newtb_button);
         ArrayList<String> newTb7 = new ArrayList<>(DriverAction.getWindowHandles());
         DriverAction.waitSec(2);
         DriverAction.switchToWindow(newTb7.get(1));
@@ -1739,22 +1727,22 @@ public class StepDefination {
     @Then("^click on testcase detail and validate filter$")
     public void testCase() throws Exception {
         DriverAction.waitSec(1);
-        DriverAction.click(locators.testcaseDetail);
+        DriverAction.click(Locators.testcaseDetail);
         DriverAction.waitSec(2);
-        DriverAction.click(locators.selectFilter3);
+        DriverAction.click(Locators.selectFilter3);
         DriverAction.waitSec(1);
-        DriverAction.click(locators.select_filter);
+        DriverAction.click(Locators.select_filter);
         DriverAction.waitSec(1);
-        DriverAction.click(locators.click_filter);
+        DriverAction.click(Locators.click_filter);
         DriverAction.waitSec(1);
 //        DriverAction.click(locator.closeFilter);
 //        DriverAction.waitSec(1);
-        String asert68 = DriverAction.getElementText(locators.inside_filter_text);
+        String asert68 = DriverAction.getElementText(Locators.inside_filter_text);
         DriverAction.waitSec(1);
-        DriverAction.click(locators.closeFilter);
+        DriverAction.click(Locators.closeFilter);
         DriverAction.waitSec(3);
         int count2 = 0;
-        List<String> listing = DriverAction.getElementsText(locators.outside_filter_text);
+        List<String> listing = DriverAction.getElementsText(Locators.outside_filter_text);
         for (int i = 0; i < listing.size(); i++) {
             if (asert68.equalsIgnoreCase(listing.get(i))) {
                 count2++;
@@ -1767,7 +1755,7 @@ public class StepDefination {
             GemTestReporter.addTestStep(" Filter Start time Validation", "Expected:" + asert68, STATUS.INFO);
             GemTestReporter.addTestStep("Filer Start time Validation", "Text we got" + listing.get(0), STATUS.FAIL);
         }
-        DriverAction.doubleClick(locators.close_filter1);
+        DriverAction.doubleClick(Locators.close_filter1);
         DriverAction.waitSec(2);
     }
 
