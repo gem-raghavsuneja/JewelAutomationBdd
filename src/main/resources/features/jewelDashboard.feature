@@ -139,7 +139,7 @@ Feature: Jewel Dashboard Automation
     And Enter Password
     Then Click on the Autolytics screen
     And Click on Create Report Tab
-    Then Open few tabs
+    Then Open few tabs 4
     And Click on SLide left button
     Then Click on the SLide most Right button
     And Click on the slide to next left button
@@ -200,7 +200,6 @@ Feature: Jewel Dashboard Automation
     Examples:
       | mainHeading   | subHeading                                                  |
       | Explore Jewel | Effortless Report analysis and Test monitoring at a glance. |
-
 
   Scenario Outline:Scroll down the screen
     Given validating whatisjewel <whatisjewel>
