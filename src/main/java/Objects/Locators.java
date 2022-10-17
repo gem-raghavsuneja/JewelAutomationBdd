@@ -2,7 +2,7 @@ package Objects;
 
 import org.openqa.selenium.By;
 
-public class locators {
+public class Locators {
 
     public static By user_name = By.xpath("//input[@placeholder='Username']");
     public static By password = By.xpath("//input[@placeholder='Password']");
