@@ -28,8 +28,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-public class stepDefination {
-    Logger logger = LoggerFactory.getLogger(stepDefination.class);
+public class StepDefination {
+    Logger logger = LoggerFactory.getLogger(StepDefination.class);
 
     @Given("You are on the login screen")
     public void you_are_on_the_login_screen() {
@@ -72,7 +72,7 @@ public class stepDefination {
             DriverAction.click(Locators.profile, "Click on Profile button", "Clicked on the Profile Button");
             GemTestReporter.addTestStep("Status of logout button", "Logout button is  visible", STATUS.PASS, DriverAction.takeSnapShot());
             Boolean b = DriverAction.getElement(Locators.log_out).isDisplayed();
-            System.out.println(b);
+
         } catch (Exception e) {
             logger.info("An exception occurred!", e);
             GemTestReporter.addTestStep("Status of logout button", "Logout button is not visible", STATUS.FAIL);
@@ -87,7 +87,7 @@ public class stepDefination {
             DriverAction.click(Locators.home_button, "Home Button", "Clicked Successfully on the Home Button");
             String s = DriverAction.getElement(Locators.page_title).getText();
             GemTestReporter.addTestStep("Text of Home Screen", s, STATUS.INFO);
-            System.out.println(s);
+
             STATUS status;
             if (s.equals("Jewel Applications")) {
                 status = STATUS.PASS;
@@ -269,11 +269,11 @@ public class stepDefination {
             GemTestReporter.addTestStep("Status of Change token button", "clicked Successful", STATUS.PASS, DriverAction.takeSnapShot());
             DriverAction.waitSec(2);
             String time = DriverAction.getElement(Locators.date_tab).getText();
-            System.out.println(time);
+
             String timep = time.substring(11, 28);
             SimpleDateFormat formatter = new SimpleDateFormat("MMMM dd,yyyy", Locale.ENGLISH);
             Date dateupdate = formatter.parse(timep);
-            System.out.println(dateupdate);
+
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMMM dd, yyyy");
             LocalDateTime now = LocalDateTime.now();
             String loc = dtf.format(now);
@@ -285,9 +285,9 @@ public class stepDefination {
             }
             GemTestReporter.addTestStep("Checking date", "Dates should match", status);
             String times = time.substring(27, 35);
-            System.out.println(times);
+
             String[] hel = times.split(":", 3);
-            System.out.println(hel[0]);
+
             String jo = hel[0];
             String koko = String.valueOf(jo.charAt(0));
             if (koko.equals(" ")) {
@@ -297,7 +297,7 @@ public class stepDefination {
             DateTimeFormatter Time = DateTimeFormatter.ofPattern("hh/mm/ss");
             LocalDateTime ti = LocalDateTime.now();
             String timess = Time.format(ti);
-            System.out.println(timess);
+
             String[] locat = timess.split("/", 3);
             int flag = 0;
             for (int o = 0; o < locat.length - 1; o++) {
@@ -357,7 +357,7 @@ public class stepDefination {
             DriverAction.click(Locators.lelement, "Logout button", "Successfully clicked on the logout button");
             DriverAction.waitSec(2);
             String titlee = DriverAction.getCurrentURL();
-            System.out.println(titlee);
+
             STATUS status;
             if (titlee.equals("https://jewel.gemecosystem.com/#/login")) {
                 status = STATUS.PASS;
@@ -436,7 +436,7 @@ public class stepDefination {
         try {
 
             String nuam = DriverAction.getElement(Locators.content_card_one).getText();
-            System.out.println(nuam);
+
             STATUS s;
             if (nuam.equals("Autolytics provides the feature for generating descriptive reports to analyze the Testcases/Suite details and also enables users to share them effortlessly.")) {
                 s = STATUS.PASS;
@@ -478,7 +478,7 @@ public class stepDefination {
         try {
             STATUS status;
             String nuam = DriverAction.getElement(Locators.content_card_two).getText();
-            System.out.println(nuam);
+
             if (nuam.equals("Keeping in mind the Secure/Safe utilization, Jewel authenticates each user with a Bridge Token which can also be changed or retrieved back as per convenience.")) {
                 status = STATUS.PASS;
             } else {
@@ -498,7 +498,7 @@ public class stepDefination {
             DriverAction.waitSec(2);
 //            GemTestReporter.addTestStep("Login Success", "Successfully Logged in!!", STATUS.PASS);
             String s = DriverAction.getElementText(Locators.login_alert);
-            System.out.println(s);
+
             GemTestReporter.addTestStep("Alert Text", s, STATUS.INFO);
             DriverAction.waitSec(5);
             DriverAction.waitSec(5);
@@ -598,7 +598,7 @@ public class stepDefination {
             DriverAction.click(Locators.register_button, "Register button", "Successfully clicked on the Register Button");
             DriverAction.waitSec(1);
             String text = DriverAction.getElement(Locators.register_alert).getText();
-            System.out.println(text);
+
             STATUS status;
             if (text.equals("User Registered.")) {
                 status = STATUS.PASS;
@@ -1715,11 +1715,11 @@ public class stepDefination {
             DriverAction.waitSec(1);
             DriverAction.click(Locators.selectPass);
             String asert = DriverAction.getElementText(Locators.selct_pass_text);
-            System.out.println(asert);
+
             DriverAction.waitSec(1);
             DriverAction.click(Locators.closeFilter);
             DriverAction.waitSec(3);
-            System.out.println(Locators.selct_pass_text);
+
             int count = 0;
             int flag = 0;
             List<String> list = DriverAction.getElementsText(Locators.pass);
@@ -1729,7 +1729,7 @@ public class stepDefination {
                 }
             }
             if (count == list.size()) {
-                System.out.println(1);
+
                 GemTestReporter.addTestStep(" Filter Pass Validation", "Expected:" + asert, STATUS.INFO);
                 GemTestReporter.addTestStep("Filer Pass Validation", "Text we got" + list.get(0), STATUS.PASS);
             } else {
